@@ -9,6 +9,7 @@ interface IProduct {
   numReviews: number;
   countInStock: number;
   description: string;
+  slug: string;
 }
 
 interface IDataProduct {
@@ -20,6 +21,7 @@ const data: IDataProduct = {
     {
       id: 1,
       name: "Free Shirt",
+      slug: "free-shirt",
       category: "Shirts",
       image: "/images/shirt1.jpg",
       price: 70,
@@ -32,6 +34,7 @@ const data: IDataProduct = {
     {
       id: 2,
       name: "Fit Shirt",
+      slug: "fit-shirt",
       category: "Shirts",
       image: "/images/shirt2.jpg",
       price: 80,
@@ -44,6 +47,7 @@ const data: IDataProduct = {
     {
       id: 3,
       name: "Slim Shirt",
+      slug: "slim-shirt",
       category: "Shirts",
       image: "/images/shirt3.jpg",
       price: 90,
@@ -56,6 +60,7 @@ const data: IDataProduct = {
     {
       id: 4,
       name: "Gold Pants",
+      slug: "gold-pants",
       category: "Pants",
       image: "/images/pants1.jpg",
       price: 90,
@@ -68,6 +73,7 @@ const data: IDataProduct = {
     {
       id: 5,
       name: "Fit Pants",
+      slug: "fit-pants",
       category: "Pants",
       image: "/images/pants2.jpg",
       price: 95,
@@ -80,6 +86,7 @@ const data: IDataProduct = {
     {
       id: 6,
       name: "Classic Pants",
+      slug: "classic-shirt",
       category: "Pants",
       image: "/images/pants3.jpg",
       price: 75,
