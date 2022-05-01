@@ -17,7 +17,7 @@ const Layout: NextPage<IPropsLayout> = ({ children }) => {
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <Typography>Amazona</Typography>
+          <Typography>amazona</Typography>
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children ?? ""}</Container>
