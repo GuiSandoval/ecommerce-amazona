@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import "../styles/global.css";
+import { StoreProvider } from "../utils/Store";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -10,6 +11,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     }
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <StoreProvider>
+      <Component {...pageProps} />
+    </StoreProvider>
+  );
 };
 export default MyApp;

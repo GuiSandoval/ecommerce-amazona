@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useContext } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -11,8 +12,11 @@ import {
   createTheme,
   ThemeProvider,
   CssBaseline,
+  Switch,
 } from "@material-ui/core";
+import Cookies from "js-cookie";
 import useStyles from "../utils/styles";
+import { Store } from "../utils/Store";
 
 interface IPropsLayout {
   title?: string;
@@ -21,6 +25,8 @@ interface IPropsLayout {
 }
 
 const Layout: NextPage<IPropsLayout> = ({ title, description, children }) => {
+  const { state, dispatch } = useContext(Store);
+  const { darkMode } = state;
   const theme = createTheme({
     typography: {
       h1: {
@@ -38,7 +44,7 @@ const Layout: NextPage<IPropsLayout> = ({ title, description, children }) => {
       },
     },
     palette: {
-      type: "light",
+      type: darkMode ? "dark" : "light",
       primary: {
         main: "#f0c000",
       },
@@ -48,6 +54,11 @@ const Layout: NextPage<IPropsLayout> = ({ title, description, children }) => {
     },
   });
   const classes = useStyles();
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
+    const newDarkValue = !darkMode;
+    Cookies.set("darkMode", newDarkValue ? "ON" : "OFF");
+  };
 
   return (
     <div>
@@ -66,6 +77,7 @@ const Layout: NextPage<IPropsLayout> = ({ title, description, children }) => {
             </NextLink>
             <div className={classes.grow} />
             <div>
+              <Switch checked={darkMode} onChange={darkModeChangeHandler} />
               <NextLink href="/cart" passHref>
                 <Link>Cart</Link>
               </NextLink>
