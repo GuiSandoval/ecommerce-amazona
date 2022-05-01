@@ -1,6 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { AppBar, Toolbar, Typography, Container } from "@material-ui/core";
+import NextLink from "next/link";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Link,
+} from "@material-ui/core";
 import useStyles from "../utils/styles";
 
 interface IPropsLayout {
@@ -17,7 +24,20 @@ const Layout: NextPage<IPropsLayout> = ({ children }) => {
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <Typography>amazona</Typography>
+          <NextLink href="/" passHref>
+            <Link>
+              <Typography className={classes.brand}>amazona</Typography>
+            </Link>
+          </NextLink>
+          <div className={classes.grow} />
+          <div>
+            <NextLink href="/cart" passHref>
+              <Link>Cart</Link>
+            </NextLink>
+            <NextLink href="/login" passHref>
+              <Link>Login</Link>
+            </NextLink>
+          </div>
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children ?? ""}</Container>
