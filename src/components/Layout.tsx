@@ -12,16 +12,19 @@ import {
 import useStyles from "../utils/styles";
 
 interface IPropsLayout {
+  title?: string;
+  description?: string;
   children: React.ReactNode;
 }
 
-const Layout: NextPage<IPropsLayout> = ({ children }) => {
+const Layout: NextPage<IPropsLayout> = ({ title, description, children }) => {
   const classes = useStyles();
 
   return (
     <div>
       <Head>
-        <title>Next Amazona</title>
+        <title>{title ? `${title} - Next Amazona` : "Next Amazona"}</title>
+        {description && <meta name="description" content={description} />}
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
