@@ -1,8 +1,5 @@
-import mongoose, {
-  CallbackWithoutResult,
-  Connection,
-  Mongoose,
-} from "mongoose";
+/* eslint-disable no-console */
+import mongoose, { ConnectOptions } from "mongoose";
 
 interface IConnection {
   isConnected?: boolean | number;
@@ -11,6 +8,8 @@ interface IConnection {
 const connection: IConnection = {};
 
 async function connect() {
+  const mongoURI = process.env.NEXT_PUBLIC_MONGO_URI;
+
   if (connection.isConnected) {
     console.log("already connected");
     return;
@@ -24,12 +23,12 @@ async function connect() {
     }
     await mongoose.disconnect();
   }
-  // mongoose connect with typescript
-
-  await mongoose.connect(process.env.MONGO_URI, {
+  await mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
+    useCreateIndex: true,
+    useFindAndModify: false,
+  } as ConnectOptions);
   console.log("new connection");
   connection.isConnected = mongoose.connections[0].readyState;
 }
