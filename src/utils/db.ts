@@ -9,7 +9,7 @@ const connection: IConnection = {};
 
 async function connect() {
   const mongoURI = process.env.NEXT_PUBLIC_MONGO_URI;
-
+  console.log("sdasd");
   if (connection.isConnected) {
     console.log("already connected");
     return;
@@ -26,8 +26,6 @@ async function connect() {
   await mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
   } as ConnectOptions);
   console.log("new connection");
   connection.isConnected = mongoose.connections[0].readyState;
