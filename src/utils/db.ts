@@ -41,6 +41,11 @@ async function disconnect() {
     }
   }
 }
-
-const db = { connect, disconnect };
+function convertDocumentToObject(document: any) {
+  document._id = document._id.toString();
+  document.createdAt = document.createdAt.toISOString();
+  document.updatedAt = document.updatedAt.toISOString();
+  return document;
+}
+const db = { connect, disconnect, convertDocumentToObject };
 export default db;

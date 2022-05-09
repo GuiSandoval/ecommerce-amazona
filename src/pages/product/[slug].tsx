@@ -16,14 +16,12 @@ import Image from "next/image";
 import Layout from "../../components/Layout";
 import data from "../../utils/data";
 import useStyles from "../../utils/styles";
+import Product from "../../models/Product";
+import db from "../../utils/db";
 
-const ProductScreen: NextPage = () => {
+const ProductScreen: NextPage = (props) => {
+  const { product } = props;
   const classes = useStyles();
-  const router = useRouter();
-  const { slug } = router.query;
-  const product = data.products.find(
-    (singleProduct) => singleProduct.slug === slug
-  );
 
   if (!product) {
     return <div>Product Not Found</div>;
@@ -110,5 +108,19 @@ const ProductScreen: NextPage = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const { params } = context;
+  const { slug } = params;
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+
+  return {
+    props: {
+      product: db.convertDocumentToObject(product),
+    },
+  };
+}
 
 export default ProductScreen;
