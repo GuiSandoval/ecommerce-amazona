@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
 import {
   Button,
@@ -18,9 +17,15 @@ import data from "../../utils/data";
 import useStyles from "../../utils/styles";
 import Product from "../../models/Product";
 import db from "../../utils/db";
+import IProduct from "../../interfaces/products";
 
-const ProductScreen: NextPage = (props) => {
-  const { product } = props;
+interface IPropsProductPage {
+  product: IProduct;
+}
+
+const ProductScreen: NextPage<IPropsProductPage> = ({
+  product,
+}: IPropsProductPage) => {
   const classes = useStyles();
 
   if (!product) {

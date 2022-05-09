@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 import mongoose, { ConnectOptions } from "mongoose";
 
@@ -42,10 +43,21 @@ async function disconnect() {
   }
 }
 function convertDocumentToObject(document: any) {
-  document._id = document._id.toString();
-  document.createdAt = document.createdAt.toISOString();
-  document.updatedAt = document.updatedAt.toISOString();
-  return document;
+  const id = document._id.toString();
+  const createdAt = document.createdAt.toISOString();
+  const updatedAt = document.updatedAt.toISOString();
+
+  // eslint-disable-next-line no-param-reassign
+  delete document._id;
+
+  const copyDocument = {
+    ...document,
+    id,
+    createdAt,
+    updatedAt,
+  };
+
+  return copyDocument;
 }
 const db = { connect, disconnect, convertDocumentToObject };
 export default db;

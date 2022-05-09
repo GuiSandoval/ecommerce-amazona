@@ -1,4 +1,5 @@
 interface IProduct {
+  id: string;
   name: string;
   slug: string;
   category: string;
@@ -11,4 +12,4 @@ interface IProduct {
   description: string;
 }
 
-export { IProduct };
+export default IProduct;
