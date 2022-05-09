@@ -38,7 +38,7 @@ const Home: NextPage<IPropsHomePage> = ({ products }: IPropsHomePage) => (
                       title={product.name}
                     />
                     <CardContent>
-                      <Typography>{product.id}</Typography>
+                      <Typography>{product.name}</Typography>
                     </CardContent>
                   </CardActionArea>
                 </Link>

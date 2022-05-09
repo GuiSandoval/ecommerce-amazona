@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import NextLink from "next/link";
 import {
   Button,
@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import data from "../../utils/data";
 import useStyles from "../../utils/styles";
 import Product from "../../models/Product";
 import db from "../../utils/db";
@@ -114,9 +113,8 @@ const ProductScreen: NextPage<IPropsProductPage> = ({
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const { params } = context;
-  const { slug } = params;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const slug = context.params?.slug as string;
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
   await db.disconnect();
@@ -126,6 +124,6 @@ export async function getServerSideProps(context: any) {
       product: db.convertDocumentToObject(product),
     },
   };
-}
+};
 
 export default ProductScreen;
